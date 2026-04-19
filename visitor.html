@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방명록</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        .entry {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>방명록</h1>
+    <form id="guestbookForm">
+        <label for="name">이름:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        <label for="message">메세지:</label><br>
+        <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
+        <button type="submit">작성하기</button>
+    </form>
+    <div id="guestbookEntries">
+        <!-- 방명록 항목이 여기에 추가됩니다 -->
+    </div>
+
+    <script>
+        document.getElementById('guestbookForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const message = document.getElementById('message').value;
+            
+            if (name && message) {
+                const entryDiv = document.createElement('div');
+                entryDiv.classList.add('entry');
+                
+                const nameElement = document.createElement('h3');
+                nameElement.textContent = name;
+                entryDiv.appendChild(nameElement);
+                
+                const messageElement = document.createElement('p');
+                messageElement.textContent = message;
+                entryDiv.appendChild(messageElement);
+                
+                document.getElementById('guestbookEntries').appendChild(entryDiv);
+                
+                // 폼 초기화
+                document.getElementById('guestbookForm').reset();
+            }
+        });
+    </script>
+</body>
+</html>
